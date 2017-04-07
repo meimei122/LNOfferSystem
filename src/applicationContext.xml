@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 自动扫描dao和service层 -->      
+	<context:component-scan base-package="org.yangpeng.dao"/>
+	<context:component-scan base-package="org.yangpeng.service"/>
+	
+	<!-- 加载数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/yp" />
+		<property name="username" value="root" />
+		<property name="password" value="123" />
+	</bean>
+	<!-- 配置sqlSessionFactory -->
+	<!-- myBatis文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+		<property name="mapperLocations" value="classpath:org/yangpeng/mapper/*.xml" />
+		<!-- mybatis配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.yangpeng.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+  
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 配置事务属性 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+		<tx:method name="add*" propagation="REQUIRED" />
+		<tx:method name="append*" propagation="REQUIRED" />
+		<tx:method name="insert*" propagation="REQUIRED" />
+		<tx:method name="save*" propagation="REQUIRED" />
+		<tx:method name="update*" propagation="REQUIRED" />
+		<tx:method name="modify*" propagation="REQUIRED" />
+		<tx:method name="edit*" propagation="REQUIRED" />
+		<tx:method name="delete*" propagation="REQUIRED" />
+		<tx:method name="remove*" propagation="REQUIRED" />
+		<tx:method name="repair" propagation="REQUIRED" />
+		<tx:method name="delAndRepair" propagation="REQUIRED" />
+		
+		<tx:method name="get*" propagation="SUPPORTS" />
+		<tx:method name="find*" propagation="SUPPORTS" />
+		<tx:method name="load*" propagation="SUPPORTS" />
+		<tx:method name="search*" propagation="SUPPORTS" />
+		<tx:method name="datagrid*" propagation="SUPPORTS" />
+		
+		<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	
+</beans>

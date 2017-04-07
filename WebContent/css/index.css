@@ -1,0 +1,53 @@
+.rgTable{
+	text-align: center;
+	top: 20px
+}
+#input{
+	margin-top: 16px;
+	margin-right: 20px;
+}
+.registerTime{
+	margin-right: 20px;
+}
+.userType{
+	margin-right: 24px;
+}
+.user{
+	margin-left: -5px;
+}
+.sitLabel{
+	margin-right: 23px;
+}
+.sitText{
+	margin-right: -11px;
+}
+.adress{
+	margin-right: -24px;
+}
+.adressLable{
+	margin-right: 25px;
+}
+.emailLable{
+	margin-right: 29px;
+}
+.email{
+	margin-right: -11px;
+}
+.phoneLable{
+	margin-right: 29px;
+}
+.phone{
+	margin-right: -20px;
+}
+.loginLable{
+	    margin-right: 32px;
+}
+.login{
+	margin-right: -2px;
+}
+.nameLable{
+	margin-right: 35px;
+}
+.name{
+	margin-right: -14px;
+}

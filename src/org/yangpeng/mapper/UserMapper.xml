@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yangpeng.dao.UserDao">
+	<!-- 增加客户信息 -->
+	<insert id="addUser" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="adminId">
+		<selectKey keyProperty="adminId" resultType='Integer' order='AFTER'  >  
+       		 SELECT LAST_INSERT_ID() AS adminId
+    	</selectKey>  
+		INSERT INTO consumer
+				(adminId,userName,adminPasw,userPhone,userEmail,
+				usertypeId,userAdress,userMotto,questionId,problemContent)
+		VALUES(NULL,#{userName},#{adminPasw},#{userPhone},#{userEmail},#{userTypeId},
+				#{userAdress},#{userMotto},#{questionId},#{problemContent})
+	</insert>
+	<!-- 显示客户信息页面 -->
+	<select id="selectUserMes" resultType="java.util.Map">
+		SELECT
+			admin.adminName,
+			admin.createDate,
+			consumer.username,
+			consumer.userphone,
+			consumer.useremail,
+			consumer.usermotto,
+			consumer.userAdress,
+			usertype.typecontest
+		FROM
+			admin ,
+			consumer ,
+			usertype
+		WHERE
+			admin.adminId = consumer.adminid AND consumer.usertypeId = usertype.userTypeId AND
+			admin.adminId = #{adminId} 
+	</select>
+	<!-- 查询用户名是否重复 -->
+	<select id="adminNameSelect" resultType="Admin">
+		SELECT
+			admin.adminId
+		FROM
+			admin
+		WHERE
+			adminName = #{adminName}
+	</select>
+	<!-- 根据adminId查询user信息 -->
+	<select id="adminMesSelect" resultType="User">
+		SELECT
+			consumer.username,
+			consumer.userphone,
+			consumer.useremail,
+			consumer.usermotto,
+			consumer.userAdress
+		FROM
+			consumer
+		WHERE
+			consumer.adminId = #{adminId} 
+	</select>
+	<update id="upUserMessage">
+		UPDATE consumer
+		<set>
+			<if test='userPhone != null and userPhone != "" '>
+				userPhone = #{userPhone}
+			</if>
+			<if test='userEmail != null and userEmail != ""'>
+				userEmail = #{userEmail}
+			</if>
+			<if test='userAdress != null and userAdress != ""'>
+				userAdress = #{userAdress}
+			</if>
+			<if test='userEmail != null and userEmail != ""'>
+				userMotto = #{userMotto}
+			</if>
+		</set>
+		<where>
+			adminId = #{adminId}
+		</where>
+	</update>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yangpeng.dao.PageDataDao">
+	<!-- 查询家教价目-->
+	<select id="selectPrice" resultType="chargePriceTo">
+		SELECT priceId,priceNumber FROM chargePrice
+	</select>
+	<!-- 查询用户类型-->
+	<select id="selectUserType" resultType="userTypeTo">
+		SELECT userTypeId,typeContest FROM userType
+			WHERE userTypeId = 1 OR userTypeId = 2;
+	</select>
+	<!-- 查询密保问题 -->
+	<select id="selectQuestion" resultType="securityQuestionTo">
+		SELECT questionId,problemContent FROM securityQuestion
+	</select>
+	<!-- 查询性别 需要不限这个选项的 -->
+	<select  id="selectSexAll" resultType="SexTo">
+		SELECT sexId,sexContxt FROM sex
+	</select>
+	<!-- 查询性别 不需要不限这个选项的 -->
+	<select   id="selectSex" resultType="SexTo">
+		SELECT sexId,sexContxt FROM sex
+			WHERE sexId = 2 or sexId = 3
+	</select >
+	<!-- 查询科目 初中-->
+	<select id="selectPR" resultType="St_Class">
+		SELECT classid,classname,classtype FROM St_Class
+		WHERE classType = 1
+	</select>
+	<!-- 查询科目 高中-->
+	<select id="selectAR" resultType="St_Class">
+		SELECT classid,classname,classtype FROM St_Class
+		WHERE classType = 2
+	</select>
+	<!-- 查询家教经验 -->
+	<select id="selectTTime" resultType="TutorTimeTo">
+		SELECT tutorTimeId,timeContxt FROM tutortime
+	</select>
+	<!-- 查询家教方式 -->
+	<select id="selectTMethod" resultType="TutorMethodTo">
+		SELECT methodId,methodContext FROM tutormethod
+	</select>
+	<!-- 查询家教类型 -->
+	<select id="selectTType" resultType="TutorTypeTo">
+		SELECT tutorTypeId,tutorContxt FROM tutortype
+	</select>
+	<!-- 查询家教擅长年级 -->
+	<select id="selectTGrade" resultType="TutorGradeTo">
+		SELECT tutorGradeId,gradeContxt FROM tutorgrade
+	</select>
+	<!-- 查询发送邮件信息 -->
+	<select id="selectEmailMessage" resultType="SendEmail">
+		SELECT emailMessage FROM sendemail WHERE emailCode = #{emailCode}
+	</select>
+</mapper>

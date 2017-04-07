@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yangpeng.dao.PrimaryStuDao">
+	<!-- 添加学生信息 -->
+	<insert id="addStu" >
+		INSERT INTO pr_information VALUES 
+		       (NULL,#{pr_name},#{pr_adress},#{pr_phone},#{pr_identity},#{pr_sex},#{pr_teaching},#{pr_money},#{pr_subject},#{pr_demand},#{pr_date},#{userid},#{status})
+	</insert>
+	<!-- 查询学生信息 -->
+	<select id="queryStu" resultType="PrimaryStu">
+		SELECT 	
+				pr_id,
+				pr_name,
+				pr_phone,
+				pr_adress,
+				pr_identity,
+				pr_sex,
+				pr_teaching,
+				pr_date,
+				`pr_demand`,
+				pr_subject,
+				pr_money,
+				pr_date,
+				status
+		FROM
+				pr_information
+		LIMIT 	
+				#{index},#{size}
+				<!-- 0,5 -->
+				
+	</select>
+	<select id="queryCountStu" resultType="int">
+		SELECT 	
+				COUNT(*)
+		FROM
+				pr_information
+
+	</select>
+	<!-- 查询学生信息是否重复 -->
+	<select id="queryRepeatStu" resultType="PrimaryStu">
+		SELECT
+				pr_name,
+				pr_subject
+		FROM
+				pr_information
+		WHERE
+				pr_name = #{pr_name}
+		AND
+				pr_subject = #{pr_subject}
+	
+	</select>
+	<!-- 查询学生详细信息 -->
+	<select id="stuMes" resultType="PrimaryStu">
+		SELECT 	
+				pr_id,
+				pr_name,<!--  -->
+				pr_phone,
+				pr_adress,
+				pr_identity,
+				pr_sex,
+				pr_teaching,
+				pr_date,
+				`pr_demand`,
+				pr_subject,
+				pr_money
+		FROM
+				pr_information
+		WHERE   
+				pr_id = #{pr_id}
+	</select>
+	<!-- 修改学生信息 -->
+	<!-- 删除学生信息 -->
+</mapper>

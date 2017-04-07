@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yangpeng.dao.ArtsStuDao">
+	<!-- 添加学生信息 -->
+	<insert id="addStu" >
+		INSERT INTO ar_information VALUES 
+		       (NULL,#{ar_name},#{ar_adress},#{ar_phone},#{ar_identity},#{ar_sex},#{ar_teaching},#{ar_money},#{ar_subject},#{ar_demand},#{ar_date},#{userid},#{status})
+	</insert>
+	<!-- 查询学生信息 -->
+	<select id="queryStu" resultType="ArtsStu">
+		SELECT
+				ar_name,
+				ar_phone,
+				ar_adress,
+				ar_identity,
+				ar_sex,
+				ar_teaching,
+				ar_money,
+				ar_date,
+				ar_demand,
+				ar_subject,
+				status
+				<!-- adminId -->
+		FROM
+				ar_information 
+		LIMIT 
+				<!-- #{index},#{size -->
+				0,5
+	</select>
+	<!-- 查询学生信息是否重复 -->
+	<select id="queryRepeatStu" resultType="ArtsStu">
+		SELECT
+				ar_name,
+				ar_subject
+		FROM
+				ar_information
+		WHERE
+				ar_name = #{ar_name}
+		AND
+				ar_subject = #{ar_subject}
+	
+	</select>
+	<!-- 修改学生信息 -->
+	<!-- 删除学生信息 -->
+</mapper>
