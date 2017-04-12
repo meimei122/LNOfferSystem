@@ -22,20 +22,20 @@ href="${pageContext.request.contextPath}/admin/login.do">登录</A>
 				</c:if>
 				<c:if test="${userName != null}">
 				<div class="dropdown">
-				<label>欢迎${userName}</label>
-  					<button class="btn btn-default dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<label style="margin: 5px 3px;">欢迎${userName}</label>
+  					<button style="padding: 9px 12px;" class="btn btn-default dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						管理
 						<span class="caret"></span>
 					</button>
-				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" >
-   					 <li ><a  tabindex="-1"  href="${pageContext.request.contextPath}/userDo/administrate.do"><span class="glyphicon glyphicon-user" ></span>我的信息</a></li>
+				<ul style="min-width: 130px;" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" >
+   					 <li ><a style="float: left;padding: 3px 10px;"  tabindex="-1"  href="${pageContext.request.contextPath}/userDo/administrate.do"><span class="glyphicon glyphicon-user" ></span>我的信息</a></li>
    					 <c:if test="${userTypeId==2}">
-   					 <li ><a  tabindex="-1"  href="${pageContext.request.contextPath}/indexAction/pr.do"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>我要请家教</a></li>
+   					 <li ><a style="float: left;padding: 3px 10px;" tabindex="-1"  href="${pageContext.request.contextPath}/indexAction/pr.do"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>我要请家教</a></li>
    					 </c:if>
    					 <c:if test="${userTypeId==1}">
-   					 <li ><a  tabindex="-1"  href="${pageContext.request.contextPath}/indexAction/at.do"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>我要做家教</a></li>
+   					 <li ><a style="float: left;padding: 3px 10px;" tabindex="-1"  href="${pageContext.request.contextPath}/indexAction/at.do"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>我要做家教</a></li>
     				 </c:if>
-    				 <li ><a  href="${pageContext.request.contextPath}/admin/login.do"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>退出登录</a></li>
+    				 <li ><a style="float: left;padding: 3px 10px;" href="${pageContext.request.contextPath}/admin/login.do"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>退出登录</a></li>
 				</ul>
 				</div>
 				</c:if>

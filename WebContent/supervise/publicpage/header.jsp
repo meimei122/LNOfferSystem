@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/themes/default/easyui.css"  />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/themes/icon.css" />
 <script type="text/javascript"src="${pageContext.request.contextPath}/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.9.1.js"></script>
     <!-- Demo page code -->
 
     <style type="text/css">
@@ -27,6 +28,12 @@
         .brand .second {
             color: #fff;
             font-weight: bold;
+        }
+        .nav-list a{
+        	font-size: 15px;
+        }
+        .on{
+        	background-color: #e0e0e8;
         }
     </style>
 
@@ -58,35 +65,52 @@
         </div>
     </div>
     <div class="sidebar-nav">
-        <a href="#dashboard-menu"  data-toggle="collapse" aria-expanded="true" aria-controls="dashboard-menu" class="nav-header" ><i class="icon-dashboard"></i>用户</a>
+        <a href="#dashboard-menu"  data-toggle="collapse" aria-expanded="true" aria-controls="dashboard-menu" class="nav-header" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>用户</a>
         <ul id="dashboard-menu" class="nav nav-list collapse in">
         	<li><a href="${pageContext.request.contextPath}/userDo/administrate.do">个人信息</a></li>
         </ul>	
         <c:if test="${userTypeId==2}">
-		<a href="#addstuMes-menu" class="nav-header" data-toggle="collapse" ><i class="icon-briefcase"></i>我要请家教</a>
+		<a href="#addstuMes-menu" class="nav-header" data-toggle="collapse" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>我要请家教</a>
         <ul id="addstuMes-menu" class="nav nav-list collapse in">
         	<li><a href="${pageContext.request.contextPath}/indexAction/pr.do">初中</a></li>
         	<li><a href="${pageContext.request.contextPath}/indexAction/ar.do">高中</a></li>
         </ul>
         </c:if>
         <c:if test="${userTypeId==1}">
-        <a href="#addteaMes-menu" class="nav-header" data-toggle="collapse" ><i class="icon-briefcase"></i>我要做家教</a>
+        <a href="#addteaMes-menu" class="nav-header" data-toggle="collapse" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>我要做家教</a>
         <ul id="addteaMes-menu" class="nav nav-list collapse in">
         	<li><a href="${pageContext.request.contextPath}/userDo/at.do">我的家教信息</a></li>
         </ul>
         </c:if>
-		<a href="#updateMes-menu" class="nav-header" data-toggle="collapse" ><i class="icon-briefcase"></i>我要改信息</a>
+		<a href="#updateMes-menu" class="nav-header" data-toggle="collapse" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>我要改信息</a>
         <ul id="updateMes-menu" class="nav nav-list collapse in">
         	<li><a href="${pageContext.request.contextPath}/userDo/au.do">信息修改</a></li>
         	<li><a href="${pageContext.request.contextPath}/userDo/nu.do">登录名修改</a></li>
         	<li><a href="${pageContext.request.contextPath}/userDo/pu.do">登录密码修改</a></li>
         </ul>
         
-		<a href="#manageMes-menu" class="nav-header" data-toggle="collapse" ><i class="icon-briefcase"></i>我要管理信息</a>
+		<a href="#manageMes-menu" class="nav-header" data-toggle="collapse" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>我要管理信息</a>
         <ul id="manageMes-menu" class="nav nav-list collapse in">
         	<li><a href="${pageContext.request.contextPath}/tutor/adminmanage.do">信息管理</a></li>
         </ul>
        
     </div>
 </body>
+	<script type="text/javascript">
+		$(".nav-header").on('click',function(){
+			var ul = $(this).next();
+			if(ul.hasClass("in")){
+				ul.removeClass("in");
+			}else{
+				ul.addClass("in");
+			}
+		});
+		/* $(document).ready(function(){
+			$(".nav-list li").on('click',function(){
+				debugger;
+				$(".nav-list").find("li").removeClass("on");
+				$(this).addClass("on");
+			});  
+		}); */
+	</script>
 </html>
